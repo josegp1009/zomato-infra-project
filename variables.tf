@@ -13,6 +13,10 @@ variable "project_env" {
   type        = string
 }
 
+variable "project_owner" {
+  description = "my project environment"
+  type        = string
+}
 variable "instance_type" {
   description = "my ec2 instance type"
   type        = string
