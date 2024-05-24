@@ -69,6 +69,20 @@ resource "aws_instance" "frontend" {
 }
 
 
+resource "aws_instance" "monitoring" {
+
+  ami                    = var.instance_ami
+  instance_type          = var.instance_type
+  key_name               = var.key_name
+  vpc_security_group_ids = [aws_security_group.frontend_access.id]
+  user_data              = file("setup.sh")
+  tags = {
+    Name = "${var.project_name}-${var.project_env}-monitoring"
+  }
+}
+
+
+
 resource "aws_eip" "frontend" {
   instance = aws_instance.frontend.id
   domain   = "vpc"
